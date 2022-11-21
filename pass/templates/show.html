@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Data</title>
+    <style>
+    tr,td,th{
+            border: 2px solid black;
+            text-align: center;
+            font-size: large;
+          
+        }
+       
+        table {
+  position: relative;
+  width: 100%; border:2px solid black;
+  z-index: 1;
+}
+
+table::before {
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;  
+  opacity: .8; 
+  z-index: -1;
+  background: url(/static/Logo.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+        #head{
+            text-align: center;
+            font-size: xx-large;
+            text-decoration: underline;
+            color: navy;
+        }
+        .buttons{
+            background:none;
+            color: navy;
+            text-decoration: none;
+            font-size: large;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        
+        #newEntry{
+            background:none;
+            color: navy;
+            text-decoration: none;
+            font-size: large;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .buttons:hover,#newEntry:hover{
+            color: blue;
+        }
+        table{
+            background: #00AEE3;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="head">Show all data</h2>
+    <div id="oneDiv">
+        <table>
+            <tr>
+                <td colspan="9"><p><a id="newEntry" href="/entry">New Entry</a></p></td>
+            </tr>
+            <tr>
+                <th>UID</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>gender</th>
+                <th>Payment Mode</th>
+                <th>Register Date</th>
+                <th>Register By</th>
+                <th>Check In</th>
+                <th>Buttons</th>
+            </tr>
+            {% for d in data  %}
+                <tr>
+                    <td>{{d.uid}}</td>
+                    <td>{{d.name}}</td>
+                    <td>{{d.phnNo}}</td>
+                    <td>{{d.gender}}</td>
+                    <td>{{d.paymentMode}}</td>
+                    <td>{{d.regDate}}</td>
+                    <td>{{d.story}}</td>
+                    <td>{{d.checkIn}}</td>
+                    <td><pre><a href="/edit?uid={{d.uid}}" class='buttons'  >Edit</a> <a class="buttons" href="/delete?uid={{d.uid}}">Delete</a></pre></td>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+{% endblock body %}
+</html>
